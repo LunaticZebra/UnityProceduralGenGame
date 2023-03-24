@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
+using Quaternion = System.Numerics.Quaternion;
 
 public class GenerateMap : MonoBehaviour
 {
@@ -22,6 +23,12 @@ public class GenerateMap : MonoBehaviour
 
 
     void Awake()
+        {
+            GenerateFloorPositions();
+            InstantiateFloorTiles();
+        }
+
+    private void GenerateFloorPositions()
     {
         FloorPositions = new HashSet<Vector2Int>();
         for (int i = 0; i < iterations; i++)
@@ -29,11 +36,15 @@ public class GenerateMap : MonoBehaviour
             FloorPositions.UnionWith(RandomWalk.GoForWalk(startingPosition, walkDistance));
             if (startAtRandomPlace) startingPosition = FloorPositions.ElementAt(Random.Range(0,FloorPositions.Count));
         }
+    }
 
+    private void InstantiateFloorTiles()
+    {
         for (int i = 0; i < FloorPositions.Count; i++)
         {
-            Debug.Log(FloorPositions.ElementAt(i));
+            Vector2Int position = FloorPositions.ElementAt(i);
+            Instantiate(Tile, new Vector2(position.x, position.y),
+                UnityEngine.Quaternion.identity, TileHolder.transform);
         }
     }
-    
 }
