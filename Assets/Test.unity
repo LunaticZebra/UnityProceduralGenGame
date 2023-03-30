@@ -154,10 +154,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startingPosition: {x: 0, y: 0}
   walkDistance: 30
-  iterations: 25
-  startAtRandomPlace: 0
+  iterations: 40
+  startAtRandomPlace: 1
   TileHolder: {fileID: 2074844413}
   Tile: {fileID: 3850262052734368740, guid: e38dd8a02f6ef49fda955db5a939829f, type: 3}
+  Wall: {fileID: 1753858577360270448, guid: 9f488ba9f3fbea644bf724f087a7ac23, type: 3}
 --- !u!4 &2074844415
 Transform:
   m_ObjectHideFlags: 0
@@ -226,7 +227,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 10
+  orthographic size: 20
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2

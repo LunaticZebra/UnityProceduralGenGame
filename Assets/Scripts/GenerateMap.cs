@@ -19,6 +19,8 @@ public class GenerateMap : MonoBehaviour
 
     [SerializeField] private GameObject Tile;
 
+    [SerializeField] private GameObject Wall;
+
     public HashSet<Vector2Int> FloorPositions;
 
 
@@ -26,7 +28,17 @@ public class GenerateMap : MonoBehaviour
         {
             GenerateFloorPositions();
             InstantiateFloorTiles();
+            InstantiateWalls();
         }
+
+    private void InstantiateWalls()
+    {
+        HashSet<Vector2Int> wallsPositions = GenerateWalls.GetWallsPositions(FloorPositions);
+        foreach (Vector2Int wallPos in wallsPositions)
+        {
+            Instantiate(Wall, new Vector2(wallPos.x, wallPos.y), UnityEngine.Quaternion.identity, TileHolder.transform);
+        }
+    }
 
     private void GenerateFloorPositions()
     {
