@@ -1,10 +1,6 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
-using Quaternion = System.Numerics.Quaternion;
-
 public class GenerateMap : MonoBehaviour
 {
     [SerializeField] private Vector2Int startingPosition;
@@ -42,7 +38,7 @@ public class GenerateMap : MonoBehaviour
         HashSet<Vector2Int> wallsPositions = GenerateWalls.GetWallsPositions(FloorPositions);
         foreach (Vector2Int wallPos in wallsPositions)
         {
-            Instantiate(Wall, new Vector2(wallPos.x, wallPos.y), UnityEngine.Quaternion.identity, TileHolder.transform);
+            Instantiate(Wall, new Vector2(wallPos.x, wallPos.y), Quaternion.identity, TileHolder.transform);
         }
     }
 
@@ -62,7 +58,7 @@ public class GenerateMap : MonoBehaviour
         {
             Vector2Int position = FloorPositions.ElementAt(i);
             Instantiate(Tile, new Vector2(position.x, position.y),
-                UnityEngine.Quaternion.identity, TileHolder.transform);
+                Quaternion.identity, TileHolder.transform);
         }
     }
 
@@ -71,7 +67,7 @@ public class GenerateMap : MonoBehaviour
         Dictionary<Vector2Int, List<Vector2Int>> enemiesLocations = GenerateEnemy.GetEnemiesPositions(FloorPositions, NumberOfEnemiesToSpawn);
         foreach(Vector2Int key in enemiesLocations.Keys)
         {
-            Instantiate(EnemyPrefab, new Vector2(key.x, key.y), UnityEngine.Quaternion.identity, TileHolder.transform).GetComponent<EnemyBehaviour>().MovePositions = enemiesLocations[key];
+            Instantiate(EnemyPrefab, new Vector2(key.x, key.y), Quaternion.identity, TileHolder.transform).GetComponent<EnemyBehaviour>().MovePositions = enemiesLocations[key];
         }
         GameStateManager.SetNumberOfEnemies(enemiesLocations.Count);
     }

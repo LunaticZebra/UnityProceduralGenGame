@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 375592122817730179}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -130,6 +130,10 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: d164816a-232f-485b-b887-9a77345bc4c3
     m_ActionName: Player/MoveRight[/Keyboard/d]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 21910ce9-393e-4451-9064-07465ec8c373
+    m_ActionName: Player/Shoot[/Keyboard/space]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -149,6 +153,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5
   slowDownSpeed: 0.3
+  bulletPrefab: {fileID: 0}
+  shootCooldown: 0
+  bulletSpeed: 0
 --- !u!50 &375592122817730181
 Rigidbody2D:
   serializedVersion: 4

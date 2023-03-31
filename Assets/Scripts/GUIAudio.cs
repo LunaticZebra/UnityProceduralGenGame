@@ -1,11 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GUIAudio : MonoBehaviour
 {
     public float volume = 0.5f;
-    public float minVolume = 0.0f;
+    public float minVolume;
     public float maxVolume = 1.0f;
 
     private AudioSource audio;
@@ -18,7 +16,6 @@ public class GUIAudio : MonoBehaviour
 
     void Update()
     {
-        Debug.Log("Sussss");
         audio.volume = volume;
     }
 

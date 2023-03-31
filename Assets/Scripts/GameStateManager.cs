@@ -22,10 +22,12 @@ public class GameStateManager: MonoBehaviour
     public static void SetNumberOfEnemies(int numberOfEnemies)
     {
         NumberOfEnemies = numberOfEnemies;
+        LabelManager.ChangeLabelValue(NumberOfEnemies);
     }
     public static void DecraseNumberOfEnemies()
     {
         NumberOfEnemies -= 1;
+        LabelManager.ChangeLabelValue(NumberOfEnemies);
     }
     public static void CheckIfLevelFinished()
     {
@@ -39,6 +41,12 @@ public class GameStateManager: MonoBehaviour
             }
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
+    }
+
+    public static void ResetGame()
+    {
+        Level = 0;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
     public static int GetNumberOfEnemies()
     {

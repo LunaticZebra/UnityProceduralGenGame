@@ -1,18 +1,19 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class LabelManager : MonoBehaviour
 {
-    private static TMPro.TextMeshPro textMeshPro;
+    private static TextMeshProUGUI _textMeshPro;
     private void Awake()
     {
-        textMeshPro = gameObject.GetComponent<TMPro.TextMeshPro>();
+        _textMeshPro = gameObject.GetComponent<TextMeshProUGUI>();
+        print(_textMeshPro==null);
     }
     
-    public static void UpdateLabelValue()
+    public static void ChangeLabelValue(int number)
     {
-        textMeshPro.text = "Wrogowie:" + GameStateManager.GetNumberOfEnemies();
+        Debug.Log("CHANGED TO -" + number);
+        _textMeshPro.text = "Wrogowie:" + number;
     }
 
 }

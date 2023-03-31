@@ -37,12 +37,16 @@ public class EnemyBehaviour : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Player") Destroy(collision.gameObject);
-        else if (collision.gameObject.tag == "Projectile") {
-            Destroy(gameObject);
-            GameStateManager.DecraseNumberOfEnemies();
-            GameStateManager.CheckIfLevelFinished();
-         };
+        if (collision.gameObject.tag == "Player")
+        {
+            Destroy(collision.gameObject);
+            StartCoroutine(wait2Seconds());
+        }
     }
 
+    IEnumerator wait2Seconds()
+    {
+        yield return new WaitForSeconds(2);
+        GameStateManager.ResetGame();
+    }
 }
