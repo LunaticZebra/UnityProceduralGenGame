@@ -7,7 +7,7 @@ using Quaternion = System.Numerics.Quaternion;
 
 public class GenerateMap : MonoBehaviour
 {
-    [SerializeField] private Vector2Int startingPosition = new Vector2Int(0, 0);
+    [SerializeField] private Vector2Int startingPosition;
 
     [SerializeField] private int walkDistance = 10;
 
@@ -21,14 +21,20 @@ public class GenerateMap : MonoBehaviour
 
     [SerializeField] private GameObject Wall;
 
+    [SerializeField] private int NumberOfEnemiesToSpawn;
+
+    [SerializeField] private GameObject EnemyPrefab;
+
     public HashSet<Vector2Int> FloorPositions;
 
 
     void Awake()
         {
+            startingPosition = new Vector2Int(0, 0);
             GenerateFloorPositions();
             InstantiateFloorTiles();
             InstantiateWalls();
+            InstantiateEnemies();
         }
 
     private void InstantiateWalls()
@@ -58,5 +64,15 @@ public class GenerateMap : MonoBehaviour
             Instantiate(Tile, new Vector2(position.x, position.y),
                 UnityEngine.Quaternion.identity, TileHolder.transform);
         }
+    }
+
+    private void InstantiateEnemies()
+    {
+        Dictionary<Vector2Int, List<Vector2Int>> enemiesLocations = GenerateEnemy.GetEnemiesPositions(FloorPositions, NumberOfEnemiesToSpawn);
+        foreach(Vector2Int key in enemiesLocations.Keys)
+        {
+            Instantiate(EnemyPrefab, new Vector2(key.x, key.y), UnityEngine.Quaternion.identity, TileHolder.transform).GetComponent<EnemyBehaviour>().MovePositions = enemiesLocations[key];
+        }
+        GameStateManager.SetNumberOfEnemies(enemiesLocations.Count);
     }
 }
